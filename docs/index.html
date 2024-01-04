@@ -13,13 +13,13 @@ from SPARQLWrapper import SPARQLWrapper
 
 sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='json')
 sparql.setQuery("""
-  PREFIX dbpedia-owl:  <http://dbpedia.org/ontology/>
+  PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
   SELECT ?a ?b ?o WHERE {
 <http://ja.dbpedia.org/resource/中二病でも恋がしたい!> rdfs:label ?label;
 <http://dbpedia.org/ontology/director> ?a ;
 <http://dbpedia.org/ontology/productionCompany> ?b ;
 <http://dbpedia.org/ontology/abstract> ?o .
-}
+  }
 """)
 results = sparql.query().convert()
       
