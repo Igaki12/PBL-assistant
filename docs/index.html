@@ -5,14 +5,11 @@
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
   </head>
   <body>
-
+    <py-config>
+      packages = ["SPARQLWrapper"]
+    </py-config>
     <py-script>
-      from datetime import datetime
-      now = datetime.now()
-      print(f"今は{now:%Y年%m月%d日 %H:%M:%S}です。")
-
-      <!-- pip install SPARQLWrapper -->
-      <!-- from SPARQLWrapper import SPARQLWrapper
+      from SPARQLWrapper import SPARQLWrapper
 
       sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='json')
       sparql.setQuery("""                                                                                                                                                                      
@@ -25,7 +22,11 @@
           }                                                                                                                    
       """)
       results = sparql.query().convert()
-      display(f"{results}") -->
+      display(f"{results}")
     </py-script>
   </body>
 </html>
+
+<!-- from datetime import datetime
+now = datetime.now()
+print(f"今は{now:%Y年%m月%d日 %H:%M:%S}です。") -->
