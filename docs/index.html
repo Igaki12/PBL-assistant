@@ -17,12 +17,12 @@ from SPARQLWrapper import SPARQLWrapper , JSON
 
 sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='JSON')
 sparql.setQuery("""
-  PREFIX dbpedia-owl: 'http://dbpedia.org/ontology/'
+  PREFIX dbpedia-owl: &lt;http://dbpedia.org/ontology/&gt;
   SELECT ?a ?b ?o WHERE {
-'http://ja.dbpedia.org/resource/中二病でも恋がしたい!' rdfs:label ?label;
-'http://dbpedia.org/ontology/director' ?a ;
-'http://dbpedia.org/ontology/productionCompany' ?b ;
-'http://dbpedia.org/ontology/abstract' ?o .
+&lt;http://ja.dbpedia.org/resource/中二病でも恋がしたい!&gt; rdfs:label ?label;
+&lt;http://dbpedia.org/ontology/director&gt; ?a ;
+&lt;http://dbpedia.org/ontology/productionCompany&gt; ?b ;
+&lt;http://dbpedia.org/ontology/abstract&gt; ?o .
   }
 """)
 results = sparql.query().convert()
