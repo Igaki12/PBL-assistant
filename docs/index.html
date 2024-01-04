@@ -12,6 +12,19 @@
 from SPARQLWrapper import SPARQLWrapper
 
 sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='json')
+sparql.setQuery("""
+    PREFIX gts: <http://resource.geosciml.org/ontology/timescale/gts#>
+
+    SELECT *
+    WHERE {
+        ?a a gts:Age .
+    }
+    ORDER BY ?a
+    LIMIT 3
+    """
+)
+results = sparql.query().convert()
+print(results)
 
     </py-script>
   </body>
