@@ -13,13 +13,14 @@ from datetime import datetime
 now = datetime.now()
 print(f"今は{now:%Y年%m月%d日 %H:%M:%S}です。")
 print(f"&lt;http://dbpedia.org/ontology/&gt;")
+print(f"&lt;http://ja.dbpedia.org/resource/中二病でも恋がしたい!&gt;)
 from SPARQLWrapper import SPARQLWrapper , JSON
 
 sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='JSON')
 sparql.setQuery("""
   PREFIX dbpedia-owl: &lt;http://dbpedia.org/ontology/&gt;
   SELECT ?a ?b ?o WHERE {
-&lt;http://ja.dbpedia.org/resource&gt; rdfs:label ?label;
+&lt;http://ja.dbpedia.org/resource/中二病でも恋がしたい!&gt; rdfs:label ?label;
 &lt;http://dbpedia.org/ontology/director&gt; ?a ;
 &lt;http://dbpedia.org/ontology/productionCompany&gt; ?b ;
 &lt;http://dbpedia.org/ontology/abstract&gt; ?o .
