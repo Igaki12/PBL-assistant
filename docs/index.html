@@ -19,7 +19,7 @@ sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='JS
 sparql.setQuery("""
   PREFIX dbpedia-owl: &lt;http://dbpedia.org/ontology/&gt;
   SELECT ?a ?b ?o WHERE {
-&lt;http://ja.dbpedia.org/resource/中二病でも恋がしたい!&gt; rdfs:label ?label;
+&lt;http://ja.dbpedia.org/resource&gt; rdfs:label ?label;
 &lt;http://dbpedia.org/ontology/director&gt; ?a ;
 &lt;http://dbpedia.org/ontology/productionCompany&gt; ?b ;
 &lt;http://dbpedia.org/ontology/abstract&gt; ?o .
