@@ -18,12 +18,12 @@ print(f"&lt;http://ja.dbpedia.org/resource/あいうえお&gt;")
 from SPARQLWrapper import SPARQLWrapper , JSON
 
 sparql = SPARQLWrapper(
-  "http://vocabs.ardc.edu.au/repository/api/sparql/"
+  "https://vocabs.ardc.edu.au/repository/api/sparql/"
   "csiro_international-chronostratigraphic-chart_geologic-time-scale-2020"
 )
 sparql.setReturnFormat(JSON)
 sparql.setQuery("""
-  PREFIX gts: &lt;wss://resource.geosciml.org/ontology/timescale/gts#&gt;
+  PREFIX gts: &lt;http://resource.geosciml.org/ontology/timescale/gts#&gt;
   SELECT *
   WHERE {
     ?a a gts:Age .
