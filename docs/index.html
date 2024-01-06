@@ -23,7 +23,7 @@ sparql = SPARQLWrapper(
 )
 sparql.setReturnFormat(JSON)
 sparql.setQuery("""
-  PREFIX gts: &lt;http://resource.geosciml.org/ontology/timescale/gts#&gt;
+  PREFIX gts: &lt;https://resource.geosciml.org/ontology/timescale/gts#&gt;
   SELECT *
   WHERE {
     ?a a gts:Age .
