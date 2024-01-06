@@ -17,7 +17,11 @@ print(f"&lt;http://dbpedia.org/ontology/&gt;")
 print(f"&lt;http://ja.dbpedia.org/resource/中二病でも恋がしたい!&gt;")
 from SPARQLWrapper import SPARQLWrapper , JSON
 
-sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='JSON')
+sparql = SPARQLWrapper(
+  "http://vocabs.ardc.edu.au/repository/api/sparql/"
+  "csiro_international-chronostratigraphic-chart_geologic-time-scale-2020"
+)
+sparql.setReturnFormat(JSON)
 sparql.setQuery("""
   PREFIX gts: &lt;http://resource.geosciml.org/ontology/timescale/gts#&gt;
   SELECT *
