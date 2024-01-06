@@ -14,7 +14,7 @@ now = datetime.now()
 print(f"{now}")
 print(f"今は{now:%Y年%m月%d日 %H:%M:%S}です。")
 print(f"&lt;http://dbpedia.org/ontology/&gt;")
-print(f"&lt;http://ja.dbpedia.org/resource/中二病でも恋がしたい!&gt;")
+print(f"&lt;http://ja.dbpedia.org/resource/あいうえお&gt;")
 from SPARQLWrapper import SPARQLWrapper , JSON
 
 sparql = SPARQLWrapper(
@@ -36,6 +36,7 @@ try:
   ret = sparql.queryAndConvert()
 
   for r in ret["results"]["bindings"]:
+    print("取得に成功")
     print(f"{r}")
 except Exception as e:
   print("取得に失敗")
