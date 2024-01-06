@@ -18,7 +18,7 @@ print(f"&lt;http://ja.dbpedia.org/resource/あいうえお&gt;")
 from SPARQLWrapper import SPARQLWrapper , JSON
 
 sparql = SPARQLWrapper(
-  "https://vocabs.ardc.edu.au/repository/api/sparql/"
+  "http://vocabs.ardc.edu.au/repository/api/sparql/"
   "csiro_international-chronostratigraphic-chart_geologic-time-scale-2020"
 )
 sparql.setReturnFormat(JSON)
