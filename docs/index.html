@@ -19,13 +19,22 @@ from SPARQLWrapper import SPARQLWrapper , JSON
 
 sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='JSON')
 sparql.setQuery("""
-  PREFIX dbpedia-owl:  &lt;http://dbpedia.org/ontology/&gt;
-  SELECT ?pref WHERE {
-  ?pref dbpedia-owl:wikiPageWikiLink category-ja:日本の都道府県.  }
+  PREFIX gts: &lt;http://resource.geosciml.org/ontology/timescale/gts#&gt;
+  SELECT *
+  WHERE {
+    ?a a gts:Age .
+  }
+  ORDER BY ?a
+  LIMIT 3
   """)
-results = sparql.query().convert()
-      
-display(f"{results}")
+
+try:
+  ret = sparql.queryAndConvert()
+
+  for r in ret["results"]["bindings"]:
+    print(f"{r}")
+except Exception as e:
+  print(f"{e}")
     </py-script>
   </body>
 </html>
