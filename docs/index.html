@@ -1,63 +1,43 @@
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  </head>
-  <body>
-    <py-config>
-      packages = ["Lib"]
-    </py-config>
-    <py-script>
-from datetime import datetime
-now = datetime.now()
-print(f"{now}")
-print(f"今は{now:%Y年%m月%d日 %H:%M:%S}です。")
-print(f"&lt;http://dbpedia.org/ontology/&gt;")
-print(f"&lt;http://ja.dbpedia.org/resource/あいうえお&gt;")
+<head>
+	<meta charset="UTF-8">
+	<title>sparql</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript">
 
+	// GETリクエストを送信
+	$.get(
+		"http://sparql.sabae.jrrk.org/data/sparql",	// エンドポイント
+		{query:"\
+			PREFIX schema: <http://schema.org/> \
+			SELECT ?desc ?img \
+			WHERE { \
+			GRAPH ?g { \
+				?id schema:description ?desc. \
+				?id schema:image ?img. \
+			} \
+			} limit 20 \
+		"},	// クエリ(説明文と画像を最大20件まで要求)
+		success,	// 返ってきたデータを処理する関数
+		"json"	// 返ってきてほしいデータの形式
+	);
 
-import urllib.request
-import urllib.parse
+	// getリクエストで得たdataを処理する
+	function success(data) {
+		// 文字列に変換
+		var html = JSON.stringify(data);
+		// そのまま表示
+		$("#disp").html(html);
+	}
 
-data = urllib.parse.quote('''
-        PREFIX refexo: &lt;http://purl.jp/bio/01/refexo#&gt;
-        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-        PREFIX refexs: &lt;http://refex.dbcls.jp/sample/&gt;
-        SELECT DISTINCT ?organism
-        WHERE {
-         refexs:RES00000003 refexo:organism ?organism .
-        }
-''')
+	</script>
+	</head>
 
-# 細かい設定をするため、Request objectを使う
-req = urllib.request.Request("http://integbio.jp/rdf/sparql?query=%s" % data)
-req.add_header('Accept', 'application/sparql-results+json')
-response = urllib.request.urlopen(req)
+	<body>
+		<div id="disp"></div>
+		<p>このアプリケーションは、以下の著作物を改変して利用しています。<br>
+鯖江市、さばかん、クリエイティブ・コモンズ・ライセンス 表示 2.1 日本（http://creativecommons.org/licenses/by/2.1/jp/）、オープンデータ・アプリコンテスト利用規約（http://www.opendata.gr.jp/2013contest/terms/index.html#rules）</p>
 
-result = response.read()
-print(f"{result}")
-    </py-script>
-  </body>
+	</body>
 </html>
-
-<!-- from SPARQLWrapper import SPARQLWrapper , json
-
-sparql = SPARQLWrapper(endpoint='http://ja.dbpedia.org/sparql', returnFormat='json')
-sparql.setQuery("""
-    PREFIX gts: <http://resource.geosciml.org/ontology/timescale/gts#>
-
-    SELECT *
-    WHERE {
-        ?a a gts:Age .
-    }
-    ORDER BY ?a
-    LIMIT 3
-    """
-)
-results = sparql.query().convert()
-print(results) -->
-
-
-
-
