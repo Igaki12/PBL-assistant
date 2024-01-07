@@ -6,7 +6,7 @@
   </head>
   <body>
     <py-config>
-      packages = ["urllib"]
+      packages = ["Lib"]
     </py-config>
     <py-script>
 from datetime import datetime
@@ -36,6 +36,7 @@ req.add_header('Accept', 'application/sparql-results+json')
 response = urllib.request.urlopen(req)
 
 result = response.read()
+print(f"{result}")
     </py-script>
   </body>
 </html>
