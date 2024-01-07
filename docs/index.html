@@ -6,7 +6,7 @@
   </head>
   <body>
     <py-config>
-      packages = ["SPARQLWrapper"]
+      packages = ["urllib"]
     </py-config>
     <py-script>
 from datetime import datetime
@@ -15,32 +15,27 @@ print(f"{now}")
 print(f"今は{now:%Y年%m月%d日 %H:%M:%S}です。")
 print(f"&lt;http://dbpedia.org/ontology/&gt;")
 print(f"&lt;http://ja.dbpedia.org/resource/あいうえお&gt;")
-from SPARQLWrapper import SPARQLWrapper , JSON
 
-sparql = SPARQLWrapper(
-  "http://vocabs.ardc.edu.au/repository/api/sparql/"
-  "csiro_international-chronostratigraphic-chart_geologic-time-scale-2020"
-)
-sparql.setReturnFormat(JSON)
-sparql.setQuery("""
-  PREFIX gts: &lt;https://resource.geosciml.org/ontology/timescale/gts#&gt;
-  SELECT *
-  WHERE {
-    ?a a gts:Age .
-  }
-  ORDER BY ?a
-  LIMIT 3
-  """)
 
-try:
-  ret = sparql.queryAndConvert()
+import urllib.request
+import urllib.parse
 
-  for r in ret["results"]["bindings"]:
-    print("取得に成功")
-    print(f"{r}")
-except Exception as e:
-  print("取得に失敗")
-  print(f"{e}")
+data = urllib.parse.quote('''
+        PREFIX refexo: &lt;http://purl.jp/bio/01/refexo#&gt;
+        PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+        PREFIX refexs: &lt;http://refex.dbcls.jp/sample/&gt;
+        SELECT DISTINCT ?organism
+        WHERE {
+         refexs:RES00000003 refexo:organism ?organism .
+        }
+''')
+
+# 細かい設定をするため、Request objectを使う
+req = urllib.request.Request("https://integbio.jp/rdf/sparql?query=%s" % data)
+req.add_header('Accept', 'application/sparql-results+json')
+response = urllib.request.urlopen(req)
+
+result = response.read()
     </py-script>
   </body>
 </html>
