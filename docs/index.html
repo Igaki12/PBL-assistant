@@ -31,7 +31,7 @@ data = urllib.parse.quote('''
 ''')
 
 # 細かい設定をするため、Request objectを使う
-req = urllib.request.Request("https://integbio.jp/rdf/sparql?query=%s" % data)
+req = urllib.request.Request("http://integbio.jp/rdf/sparql?query=%s" % data)
 req.add_header('Accept', 'application/sparql-results+json')
 response = urllib.request.urlopen(req)
 
