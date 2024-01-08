@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript">
 
+<<<<<<< HEAD
 	// GETリクエストを送信
 	$.get(
 		"http://sparql.sabae.jrrk.org/data/sparql",	// エンドポイント
@@ -22,6 +23,22 @@
 		success,	// 返ってきたデータを処理する関数
 		"json"	// 返ってきてほしいデータの形式
 	);
+=======
+sparql = SPARQLWrapper(
+  "https://vocabs.ardc.edu.au/repository/api/sparql/"
+  "csiro_international-chronostratigraphic-chart_geologic-time-scale-2020"
+)
+sparql.setReturnFormat(JSON)
+sparql.setQuery("""
+  PREFIX gts: &lt;http://resource.geosciml.org/ontology/timescale/gts#&gt;
+  SELECT *
+  WHERE {
+    ?a a gts:Age .
+  }
+  ORDER BY ?a
+  LIMIT 3
+  """)
+>>>>>>> parent of fb91fa7 (changed from http to https)
 
 	// getリクエストで得たdataを処理する
 	function success(data) {
